@@ -805,7 +805,7 @@
   .rk-phero-ctas { gap: 10px; }
   .rk-phero-ctas .rk-btn { font-size: 13px; padding: 10px 16px; }
   .rk-phero-trust { gap: 8px; font-size: 10px; }
-  .rk-phero-right { max-width: 100%; overflow-x: auto; }
+  .rk-phero-right { max-width: 100%; overflow-x: hidden; touch-action: pan-y; }
   .rk-psection { padding: 48px 0; }
   .rk-psection-inner { padding: 0 16px; }
   .rk-sechead-title { font-size: clamp(24px, 6vw, 36px); }
