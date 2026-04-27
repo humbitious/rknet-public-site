@@ -854,3 +854,76 @@
     grid-template-columns: 1fr !important;
   }
 }
+
+/* ───── Legal modal (Privacy / Terms) ───── */
+.rk-modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(11, 11, 12, 0.55);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+  animation: rkModalFade 0.15s ease-out;
+}
+@keyframes rkModalFade { from { opacity: 0; } to { opacity: 1; } }
+.rk-modal {
+  position: relative;
+  background: var(--paper);
+  color: var(--ink);
+  width: 100%;
+  max-width: 720px;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 40px 48px 32px;
+  border: 1px solid var(--rule);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  font-family: var(--sans);
+}
+.rk-modal-close {
+  position: absolute; top: 12px; right: 16px;
+  background: transparent; border: none; cursor: pointer;
+  font-size: 28px; line-height: 1; color: var(--mute);
+  padding: 4px 8px;
+}
+.rk-modal-close:hover { color: var(--ink); }
+.rk-modal-title {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 500;
+  margin: 0 0 4px;
+}
+.rk-modal-eff {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--mute);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 0 0 24px;
+}
+.rk-modal-body h3 {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 24px 0 8px;
+}
+.rk-modal-body h3:first-child { margin-top: 0; }
+.rk-modal-body p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 4px;
+  color: var(--ink);
+}
+.rk-modal-meta {
+  margin-top: 24px !important;
+  padding-top: 16px;
+  border-top: 1px solid var(--soft);
+  font-size: 12px !important;
+  color: var(--mute);
+}
+@media (max-width: 720px) {
+  .rk-modal { padding: 32px 24px 24px; max-height: 90vh; }
+  .rk-modal-title { font-size: 22px; }
+  .rk-modal-body h3 { font-size: 13px; }
+  .rk-modal-body p { font-size: 13px; }
+}

@@ -159,6 +159,20 @@ function SectionHead({ eyebrow, title, sub, align = 'left' }) {
 function ProductFooter({ audience, onCross }) {
   const otherLabel = audience === 'expert' ? 'For companies who hire experts' : 'For experts you hire';
   const otherTo = audience === 'expert' ? 'company' : 'expert';
+  const [legalOpen, setLegalOpen] = React.useState(null); // 'privacy' | 'terms' | null
+
+  const ctaAnchor = audience === 'expert' ? 'cta' : 'pricing';
+  const scrollToCta = (e, trackId) => {
+    e.preventDefault();
+    if (trackId && typeof RKTrack !== 'undefined') RKTrack.bump(trackId);
+    const el = document.getElementById(ctaAnchor);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+  const openLegal = (e, type) => {
+    e.preventDefault();
+    setLegalOpen(type);
+  };
+
   return (
     <footer className="rk-pfooter">
       <div className="rk-pfooter-inner">
@@ -175,32 +189,84 @@ function ProductFooter({ audience, onCross }) {
           <div className="rk-foot-lab">Product</div>
           <a href="#how" data-exp="footer.how">How it works</a>
           <a href="#pricing" data-exp="footer.pricing">Pricing</a>
-          <a href="#" data-exp="footer.contract">Engagement contract</a>
-          <a href="#" data-exp="footer.security">Security</a>
+          <a href="#" onClick={(e) => scrollToCta(e, 'footer.contract')} data-exp="footer.contract">Engagement contract</a>
+          <a href="#" onClick={(e) => scrollToCta(e, 'footer.security')} data-exp="footer.security">Security</a>
         </div>
         <div className="rk-pfooter-col">
           <div className="rk-foot-lab">Resources</div>
-          <a href="#" data-exp="footer.docs">Docs</a>
-          <a href="#" data-exp="footer.changelog">Changelog</a>
-          <a href="#" data-exp="footer.substack">Dispatches</a>
+          <a href="#" onClick={(e) => scrollToCta(e, 'footer.docs')} data-exp="footer.docs">Docs</a>
+          <a href="#" onClick={(e) => scrollToCta(e, 'footer.changelog')} data-exp="footer.changelog">Changelog</a>
+          <a href="#" onClick={(e) => scrollToCta(e, 'footer.substack')} data-exp="footer.substack">Dispatches</a>
         </div>
         <div className="rk-pfooter-col">
           <div className="rk-foot-lab">Company</div>
-          <a href="#" data-exp="footer.about">About</a>
-          <a href="#" data-exp="footer.careers">Careers</a>
-          <a href="mailto:hello@rknet.co" data-exp="footer.contact">hello@rknet.co</a>
+          <a href="#" onClick={(e) => scrollToCta(e, 'footer.about')} data-exp="footer.about">About</a>
+          <a href="#" onClick={(e) => scrollToCta(e, 'footer.careers')} data-exp="footer.careers">Careers</a>
           <a href="#" onClick={(e) => { e.preventDefault(); onCross(otherTo); }} data-exp={`footer.cross.${otherTo}`}>{otherLabel} →</a>
         </div>
       </div>
       <div className="rk-pfooter-base">
         <span>© 2026 Residual Knowledge Network · a Delaware public benefit entity</span>
         <span>
-          <a href="#" data-exp="footer.privacy">Privacy</a> ·{' '}
-          <a href="#" data-exp="footer.terms">Terms</a> ·{' '}
-          <a href="#" data-exp="footer.status">Status</a>
+          <a href="#" onClick={(e) => openLegal(e, 'terms')} data-exp="footer.terms">Terms</a> ·{' '}
+          <a href="#" onClick={(e) => scrollToCta(e, 'footer.status')} data-exp="footer.status">Status</a>
         </span>
       </div>
+      {legalOpen && <LegalModal type={legalOpen} onClose={() => setLegalOpen(null)} />}
     </footer>
+  );
+}
+
+function LegalModal({ type, onClose }) {
+  React.useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [onClose]);
+
+  const title = 'Terms of Use';
+  const Body = TermsBody;
+
+  return (
+    <div className="rk-modal-overlay" onClick={onClose} role="dialog" aria-modal="true" aria-label={title}>
+      <div className="rk-modal" onClick={(e) => e.stopPropagation()}>
+        <button className="rk-modal-close" onClick={onClose} aria-label="Close">×</button>
+        <h2 className="rk-modal-title">{title}</h2>
+        <p className="rk-modal-eff">Effective April 26, 2026</p>
+        <div className="rk-modal-body"><Body /></div>
+      </div>
+    </div>
+  );
+}
+
+function TermsBody() {
+  return (
+    <>
+      <h3>1. About this site</h3>
+      <p>residualknowledge.net is the marketing site for RKNET, a project in early development. The product described is forward-looking. Features, timelines, pricing, and architectural details may change without notice.</p>
+
+      <h3>2. No service, no warranty</h3>
+      <p>Nothing on this site constitutes the provision of a service. The site is provided "as is" with no warranty of accuracy, availability, or fitness for any purpose. Information here is informational only and is not legal, financial, or professional advice.</p>
+
+      <h3>3. Submissions</h3>
+      <p>By submitting a form, you confirm the information is yours to share and accurate to your knowledge.</p>
+
+      <h3>4. Intellectual property</h3>
+      <p>All content on this site is owned by Residual Knowledge Network or its contributors. You may share links to public pages. You may not reproduce or republish content without written permission.</p>
+
+      <h3>5. Governing law</h3>
+      <p>These terms are governed by the laws of the State of Delaware, USA, without regard to conflict-of-laws principles. Any dispute relating to this site shall be brought in the state or federal courts located in Delaware.</p>
+
+      <h3>6. Changes</h3>
+      <p>We may update these terms. Material changes will be posted here with a revised effective date.</p>
+
+      <p className="rk-modal-meta">Residual Knowledge Network, a Delaware public benefit entity (in formation).</p>
+    </>
   );
 }
 
