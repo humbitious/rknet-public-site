@@ -84,7 +84,7 @@ function SuperAgentGrid({ audience = 'company' }) {
         <SectionHead eyebrow="Super-Agents" title={title} sub={sub} />
         <div className="rk-sa-grid">
           {SUPER_AGENTS.map(sa => (
-            <a key={sa.name} href="#" className="rk-sa-card" data-exp={sa.exp}>
+            <a key={sa.name} href="https://forms.gle/K3DgLqJTF8Si1wBdA" target="_blank" rel="noopener" className="rk-sa-card" data-exp={sa.exp}>
               <div className="rk-sa-kind">{sa.kind}</div>
               <div className="rk-sa-name">{sa.name}</div>
               <div className="rk-sa-meta">{sa.meta}</div>
@@ -169,9 +169,6 @@ function Cleanroom({ variant = 'expert', accentHex = '#B8411B' }) {
               <span className="rk-cr-chip">Pure collaboration</span>
               <span className="rk-cr-chip">Unambiguous ownership</span>
             </div>
-            <div style={{ marginTop: 20, display: 'flex', gap: 14, flexWrap: 'wrap' }}>
-              <a href="#" className="rk-btn rk-btn-link" data-exp="cleanroom.cta.protocol">See the cleanroom protocol →</a>
-            </div>
           </div>
         </div>
       </div>
@@ -179,4 +176,164 @@ function Cleanroom({ variant = 'expert', accentHex = '#B8411B' }) {
   );
 }
 
-Object.assign(window, { PlatformStrip, SuperAgentGrid, Cleanroom });
+// ─── How to make your Agent ─────────────────────────────
+function HowItWorks({ accentHex = '#B8411B' }) {
+  return (
+    <section className="rk-psection" id="how">
+      <div className="rk-psection-inner">
+        <SectionHead
+          eyebrow="How to make your Agent"
+          title={<>Three steps. About <em>30 minutes</em>.</>}
+          sub="Bring in what makes your work yours, teach your Agent how you think, then approve work as engagements come in. Your container stays sealed throughout — only the deliverables ever leave."
+        />
+        <div className="rk-hiw-grid">
+          <HiwStep n="01" title="Bring your context" sub="Drop in the documents, decisions, and connections that shape how you work. Gmail, Calendar, Drive, your notes — your Agent reads them in private. Nothing leaves your container.">
+            <SourcesMock />
+          </HiwStep>
+          <HiwStep n="02" title="Teach your Agent" sub="Have an ongoing conversation about how you actually work. Walk through current engagements and past jobs together. The Agent learns the moves that make you, you.">
+            <TeachMock accentHex={accentHex} />
+          </HiwStep>
+          <HiwStep n="03" title="Your Agent works" sub="When clients engage your Agent, you stay in the loop. Approve scope, review the output, get paid. Cash hits your account; ownership compounds.">
+            <WorkMock accentHex={accentHex} />
+          </HiwStep>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HiwStep({ n, title, sub, children }) {
+  return (
+    <div className="rk-hiw-step">
+      <div className="rk-hiw-mock">{children}</div>
+      <div className="rk-hiw-n">{n}</div>
+      <h3 className="rk-hiw-h">{title}</h3>
+      <p className="rk-hiw-p">{sub}</p>
+    </div>
+  );
+}
+
+// Mock 1 — Sources panel (docs + MCP connectors)
+function SourcesMock() {
+  return (
+    <div className="rk-mock rk-mock-sources">
+      <div className="rk-mock-bar">
+        <div className="rk-mock-dots"><span/><span/><span/></div>
+        <div className="rk-mock-title">Your container · Sources</div>
+      </div>
+      <div className="rk-mock-body">
+        <div className="rk-mock-lab">Documents</div>
+        <div className="rk-mock-docs">
+          <div className="rk-mock-doc"><span className="rk-mock-doc-tag">PDF</span><span>Engagement framework — v3.docx</span></div>
+          <div className="rk-mock-doc"><span className="rk-mock-doc-tag">XLSX</span><span>Diligence patterns 2018–2025</span></div>
+          <div className="rk-mock-doc"><span className="rk-mock-doc-tag">MD</span><span>How I structure first calls</span></div>
+          <div className="rk-mock-doc rk-mock-doc-add"><span>+ Add source</span></div>
+        </div>
+        <div className="rk-mock-lab" style={{ marginTop: 14 }}>Connections</div>
+        <div className="rk-mock-chips">
+          <div className="rk-mock-chip on"><span className="rk-mock-dot"/>Gmail</div>
+          <div className="rk-mock-chip on"><span className="rk-mock-dot"/>Calendar</div>
+          <div className="rk-mock-chip on"><span className="rk-mock-dot"/>Drive</div>
+          <div className="rk-mock-chip"><span className="rk-mock-dot off"/>Notion</div>
+          <div className="rk-mock-chip"><span className="rk-mock-dot off"/>Slack</div>
+          <div className="rk-mock-chip"><span className="rk-mock-dot off"/>GitHub</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Mock 2 — Teach: split layout, engagement rail + chat
+function TeachMock({ accentHex }) {
+  return (
+    <div className="rk-mock rk-mock-teach">
+      <div className="rk-mock-bar">
+        <div className="rk-mock-dots"><span/><span/><span/></div>
+        <div className="rk-mock-title">Teach your Agent</div>
+      </div>
+      <div className="rk-mock-split">
+        <div className="rk-mock-rail">
+          <div className="rk-mock-rail-lab">Current</div>
+          <div className="rk-mock-rail-row on">
+            <span className="rk-mock-rail-dot" style={{ background: accentHex }}/>
+            <span className="rk-mock-rail-name">Acme M&amp;A</span>
+            <span className="rk-mock-rail-meta">in flight</span>
+          </div>
+          <div className="rk-mock-rail-row">
+            <span className="rk-mock-rail-dot"/>
+            <span className="rk-mock-rail-name">Helio diligence</span>
+            <span className="rk-mock-rail-meta">drafting</span>
+          </div>
+          <div className="rk-mock-rail-lab" style={{ marginTop: 10 }}>Past</div>
+          <div className="rk-mock-rail-row">
+            <span className="rk-mock-rail-dot off"/>
+            <span className="rk-mock-rail-name">Q3 patent landscape</span>
+            <span className="rk-mock-rail-meta">closed</span>
+          </div>
+          <div className="rk-mock-rail-row">
+            <span className="rk-mock-rail-dot off"/>
+            <span className="rk-mock-rail-name">Article 10 mapping</span>
+            <span className="rk-mock-rail-meta">closed</span>
+          </div>
+          <div className="rk-mock-rail-row">
+            <span className="rk-mock-rail-dot off"/>
+            <span className="rk-mock-rail-name">Stealth advisory</span>
+            <span className="rk-mock-rail-meta">closed</span>
+          </div>
+        </div>
+        <div className="rk-mock-chat">
+          <div className="rk-chat-bubble user">When you review a contract, flag any indemnification cap below 2× fees.</div>
+          <div className="rk-chat-bubble agent">
+            Got it. Looking at your last 12 reviews, you also pushed back on uncapped IP indemnities every time. Should I make that a default flag?
+          </div>
+          <div className="rk-chat-bubble user small">Yes — and add mutual non-solicit to my standard checklist.</div>
+          <div className="rk-chat-input">
+            <span className="rk-chat-input-ph">Tell your Agent how you'd handle this…</span>
+            <span className="rk-chat-send" style={{ background: accentHex }}>↵</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Mock 3 — Engagements feed
+function WorkMock({ accentHex }) {
+  return (
+    <div className="rk-mock rk-mock-work">
+      <div className="rk-mock-bar">
+        <div className="rk-mock-dots"><span/><span/><span/></div>
+        <div className="rk-mock-title">Engagements</div>
+        <div className="rk-mock-earn">$12,340 <span>this month</span></div>
+      </div>
+      <div className="rk-mock-body">
+        <div className="rk-mock-eng">
+          <div className="rk-mock-eng-meta">M&amp;A diligence · super-Agent</div>
+          <div className="rk-mock-eng-title">PE firm · Friday close</div>
+          <div className="rk-mock-eng-row">
+            <span className="rk-mock-eng-status" style={{ color: accentHex }}>● Awaiting your review</span>
+            <span className="rk-mock-eng-amt">$2,571</span>
+          </div>
+        </div>
+        <div className="rk-mock-eng">
+          <div className="rk-mock-eng-meta">Stealth advising</div>
+          <div className="rk-mock-eng-title">Series A founder · concept review</div>
+          <div className="rk-mock-eng-row">
+            <span className="rk-mock-eng-status work">● In progress</span>
+            <span className="rk-mock-eng-amt">$2,400</span>
+          </div>
+        </div>
+        <div className="rk-mock-eng">
+          <div className="rk-mock-eng-meta">Compliance · Article 10</div>
+          <div className="rk-mock-eng-title">Fortune 500 · regulatory mapping</div>
+          <div className="rk-mock-eng-row">
+            <span className="rk-mock-eng-status done">● Paid</span>
+            <span className="rk-mock-eng-amt">$1,800</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+Object.assign(window, { PlatformStrip, SuperAgentGrid, Cleanroom, HowItWorks });

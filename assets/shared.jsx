@@ -42,21 +42,26 @@ function ProductNav({ audience, onCross, wordmarkStyle, ctaLabel, ctaExp }) {
   const cross = audience === 'expert'
     ? { label: 'For companies', to: 'company', exp: 'nav.cross.to-company', href: 'for-companies/index.html' }
     : { label: 'For experts', to: 'expert', exp: 'nav.cross.to-expert', href: '../index.html' };
+  const scrollTop = (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
   return (
     <header className="rk-nav">
       <div className="rk-nav-inner">
-        <a href="#" className="rk-nav-brand" data-exp="nav.brand">
+        <a href="#" onClick={scrollTop} className="rk-nav-brand" data-exp="nav.brand">
           <span className={`rk-wordmark rk-wordmark-${wordmarkStyle}`}>RKNET</span>
           <span className="rk-nav-badge">{audience === 'expert' ? 'for experts' : 'for companies'}</span>
         </a>
         <nav className="rk-nav-links">
           <a href="#how" data-exp="nav.how">How it works</a>
-          <a href="#pricing" data-exp="nav.pricing">Pricing</a>
-          <a href="#faq" data-exp="nav.faq">FAQ</a>
-          <a href={cross.href} data-exp={cross.exp}>{cross.label}</a>
+          {audience === 'expert'
+            ? <a href="#ledger" data-exp="nav.earnings">Earnings</a>
+            : <a href="#pricing" data-exp="nav.pricing">Pricing</a>}
+          {audience === 'expert' && <a href="#faq" data-exp="nav.faq">FAQ</a>}
         </nav>
         <div className="rk-nav-right">
-          <a href="#" className="rk-nav-login" data-exp="nav.login">Log in</a>
+          <a href={cross.href} className="rk-nav-cross" data-exp={cross.exp}>{cross.label} →</a>
           <a href="https://forms.gle/K3DgLqJTF8Si1wBdA" target="_blank" className="rk-nav-cta" data-exp={ctaExp || 'nav.cta'}>{ctaLabel}</a>
         </div>
       </div>
@@ -91,14 +96,23 @@ function SocialProof({ items, label }) {
 function FeatureGrid({ items }) {
   return (
     <div className="rk-fgrid">
-      {items.map((f, i) => (
-        <div key={i} className="rk-fcard">
-          <div className="rk-fcard-icon" aria-hidden>{f.icon}</div>
-          <h4>{f.title}</h4>
-          <p>{f.desc}</p>
-          {f.cta && <a href="#" className="rk-fcard-cta" data-exp={f.ctaExp}>{f.cta} →</a>}
-        </div>
-      ))}
+      {items.map((f, i) => {
+        const isExternal = f.ctaHref && /^https?:/i.test(f.ctaHref);
+        return (
+          <div key={i} className="rk-fcard">
+            <div className="rk-fcard-icon" aria-hidden>{f.icon}</div>
+            <h4>{f.title}</h4>
+            <p>{f.desc}</p>
+            {f.cta && f.ctaHref && (
+              <a href={f.ctaHref}
+                 target={isExternal ? '_blank' : undefined}
+                 rel={isExternal ? 'noopener' : undefined}
+                 className="rk-fcard-cta"
+                 data-exp={f.ctaExp}>{f.cta} →</a>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -161,17 +175,14 @@ function ProductFooter({ audience, onCross }) {
   const otherTo = audience === 'expert' ? 'company' : 'expert';
   const [legalOpen, setLegalOpen] = React.useState(null); // 'privacy' | 'terms' | null
 
-  const ctaAnchor = audience === 'expert' ? 'cta' : 'pricing';
-  const scrollToCta = (e, trackId) => {
-    e.preventDefault();
-    if (trackId && typeof RKTrack !== 'undefined') RKTrack.bump(trackId);
-    const el = document.getElementById(ctaAnchor);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
   const openLegal = (e, type) => {
     e.preventDefault();
     setLegalOpen(type);
   };
+
+  const secondLink = audience === 'expert'
+    ? <a href="#ledger" data-exp="footer.earnings">Earnings</a>
+    : <a href="#pricing" data-exp="footer.pricing">Pricing</a>;
 
   return (
     <footer className="rk-pfooter">
@@ -188,28 +199,18 @@ function ProductFooter({ audience, onCross }) {
         <div className="rk-pfooter-col">
           <div className="rk-foot-lab">Product</div>
           <a href="#how" data-exp="footer.how">How it works</a>
-          <a href="#pricing" data-exp="footer.pricing">Pricing</a>
-          <a href="#" onClick={(e) => scrollToCta(e, 'footer.contract')} data-exp="footer.contract">Engagement contract</a>
-          <a href="#" onClick={(e) => scrollToCta(e, 'footer.security')} data-exp="footer.security">Security</a>
+          {secondLink}
+          {audience === 'expert' && <a href="#faq" data-exp="footer.faq">FAQ</a>}
         </div>
         <div className="rk-pfooter-col">
-          <div className="rk-foot-lab">Resources</div>
-          <a href="#" onClick={(e) => scrollToCta(e, 'footer.docs')} data-exp="footer.docs">Docs</a>
-          <a href="#" onClick={(e) => scrollToCta(e, 'footer.changelog')} data-exp="footer.changelog">Changelog</a>
-          <a href="#" onClick={(e) => scrollToCta(e, 'footer.substack')} data-exp="footer.substack">Dispatches</a>
-        </div>
-        <div className="rk-pfooter-col">
-          <div className="rk-foot-lab">Company</div>
-          <a href="#" onClick={(e) => scrollToCta(e, 'footer.about')} data-exp="footer.about">About</a>
-          <a href="#" onClick={(e) => scrollToCta(e, 'footer.careers')} data-exp="footer.careers">Careers</a>
+          <div className="rk-foot-lab">Network</div>
           <a href="#" onClick={(e) => { e.preventDefault(); onCross(otherTo); }} data-exp={`footer.cross.${otherTo}`}>{otherLabel} →</a>
         </div>
       </div>
       <div className="rk-pfooter-base">
         <span>© 2026 Residual Knowledge Network · a Delaware public benefit entity</span>
         <span>
-          <a href="#" onClick={(e) => openLegal(e, 'terms')} data-exp="footer.terms">Terms</a> ·{' '}
-          <a href="#" onClick={(e) => scrollToCta(e, 'footer.status')} data-exp="footer.status">Status</a>
+          <a href="#" onClick={(e) => openLegal(e, 'terms')} data-exp="footer.terms">Terms</a>
         </span>
       </div>
       {legalOpen && <LegalModal type={legalOpen} onClose={() => setLegalOpen(null)} />}

@@ -48,6 +48,9 @@ function VariantA({ tweaks, ctaState, setCtaState, onCross }) {
         'Goldman','McKinsey','Cleveland Clinic','Latham & Watkins','Bain','Kaiser','Cravath'
       ]} />
 
+      {/* ── How it works ─────────────────────────────── */}
+      <HowItWorks accentHex={accentHex} />
+
       {/* ── Earnings ticker ──────────────────────────── */}
       <section className="rk-psection" id="ledger" style={{ background: 'rgba(11,11,12,0.02)' }}>
         <div className="rk-psection-inner">
@@ -71,7 +74,7 @@ function VariantA({ tweaks, ctaState, setCtaState, onCross }) {
               <p className="rk-sechead-sub">Your Agent lives in a sealed container only you have access to — not your employer, not your clients, not RKNET. Keep your background knowledge, your methods, your residual know-how here. Your Agent reads from all of it. <strong>Clients own the output. They never see the rest.</strong></p>
               <div style={{ marginTop: 24, display: 'flex', gap: 14, flexWrap: 'wrap' }}>
                 <a href="https://forms.gle/K3DgLqJTF8Si1wBdA" target="_blank" className="rk-btn rk-btn-primary" data-exp="container.cta.try" onClick={() => RKTrack.bump('container.cta.try')}>Claim your Agent</a>
-                <a href="#" className="rk-btn rk-btn-link" data-exp="container.cta.security">How the container works →</a>
+                <a href="#cleanroom" className="rk-btn rk-btn-link" data-exp="container.cta.security">How the container works →</a>
               </div>
               <div style={{ marginTop: 18, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                 <span className="rk-priv-pill">Sealed to you</span>
@@ -134,17 +137,31 @@ function VariantA({ tweaks, ctaState, setCtaState, onCross }) {
             </div>
 
             <div style={{ background: 'var(--paper)', border: '1px solid var(--rule)', padding: '24px 22px', display: 'flex', flexDirection: 'column', gap: 10 }}>
-              <div style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--mute)', fontFamily: "'JetBrains Mono', monospace" }}>Compliance review · $1,800</div>
-              <h3 style={{ fontSize: 17, lineHeight: 1.3, margin: 0 }}>A Fortune 500 needs an Article 10 mapping for an active engagement.</h3>
-              <p style={{ fontSize: 13, lineHeight: 1.55, color: 'var(--mute)', margin: 0 }}>Their contractors are already using personal AI. They need someone who can document it properly. Your Agent produces the mapping from your regulatory expertise. You review, approve, get paid.</p>
-              <a href="https://forms.gle/K3DgLqJTF8Si1wBdA" target="_blank" className="rk-btn rk-btn-link" data-exp="opp.compliance" style={{ alignSelf: 'flex-start', marginTop: 4 }}>I'd take this engagement →</a>
-            </div>
-
-            <div style={{ background: 'var(--paper)', border: '1px solid var(--rule)', padding: '24px 22px', display: 'flex', flexDirection: 'column', gap: 10 }}>
               <div style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--mute)', fontFamily: "'JetBrains Mono', monospace" }}>On-demand expert · $3,200</div>
               <h3 style={{ fontSize: 17, lineHeight: 1.3, margin: 0 }}>A deal team needs a patent landscape analysis before Monday morning.</h3>
               <p style={{ fontSize: 13, lineHeight: 1.55, color: 'var(--mute)', margin: 0 }}>It's Saturday night. Your Agent delivers the analysis from your accumulated IP expertise. You review it Sunday morning over coffee. They got partner-grade work instantly. You earned $3,200 without leaving the house.</p>
               <a href="https://forms.gle/K3DgLqJTF8Si1wBdA" target="_blank" className="rk-btn rk-btn-link" data-exp="opp.ondemand" style={{ alignSelf: 'flex-start', marginTop: 4 }}>I'd take this engagement →</a>
+            </div>
+
+            <div style={{ background: 'var(--paper)', border: '1px solid var(--rule)', padding: '24px 22px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <div style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--mute)', fontFamily: "'JetBrains Mono', monospace" }}>Model fine-tuning · $4,200</div>
+              <h3 style={{ fontSize: 17, lineHeight: 1.3, margin: 0 }}>An AI lab needs partner-grade judgment to train a legal-reasoning model.</h3>
+              <p style={{ fontSize: 13, lineHeight: 1.55, color: 'var(--mute)', margin: 0 }}>They tried the obvious vendors and got mid-pyramid signal. Now they need actual partners — but partners don't sell their reasoning patterns. Your Agent contributes graded reasoning inside a sealed cleanroom. You keep ownership and full provenance receipts. The lab gets the signal it paid for. Your career doesn't get folded into someone else's model.</p>
+              <a href="https://forms.gle/K3DgLqJTF8Si1wBdA" target="_blank" className="rk-btn rk-btn-link" data-exp="opp.training" style={{ alignSelf: 'flex-start', marginTop: 4 }}>I'd take this engagement →</a>
+            </div>
+
+            <div style={{ background: 'var(--paper)', border: '1px solid var(--rule)', padding: '24px 22px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <div style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--mute)', fontFamily: "'JetBrains Mono', monospace" }}>Security audit · $5,200</div>
+              <h3 style={{ fontSize: 17, lineHeight: 1.3, margin: 0 }}>A B2B SaaS needs a SOC 2 readiness review before a key enterprise deal closes.</h3>
+              <p style={{ fontSize: 13, lineHeight: 1.55, color: 'var(--mute)', margin: 0 }}>Their biggest prospect needs SOC 2 evidence by month-end. The audit firm's calendar is booked through Q3. Your Agent reviews their architecture and policies, pulls control gaps from your decade of audits, and drafts the readiness report with prioritized remediation. You spot-check, sign, get paid. They close the deal.</p>
+              <a href="https://forms.gle/K3DgLqJTF8Si1wBdA" target="_blank" className="rk-btn rk-btn-link" data-exp="opp.security" style={{ alignSelf: 'flex-start', marginTop: 4 }}>I'd take this engagement →</a>
+            </div>
+
+            <div style={{ background: 'var(--paper)', border: '1px solid var(--rule)', padding: '24px 22px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <div style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--mute)', fontFamily: "'JetBrains Mono', monospace" }}>Data-center electrical · $7,400</div>
+              <h3 style={{ fontSize: 17, lineHeight: 1.3, margin: 0 }}>A hyperscaler's design team needs a power-system review for a 1.2&nbsp;GW campus.</h3>
+              <p style={{ fontSize: 13, lineHeight: 1.55, color: 'var(--mute)', margin: 0 }}>Site selection is locked, but the prelim utility study just came back with capacity flags. Your Agent walks the substation interface and load-balancing scheme, draws on your portfolio of 30+ data-center builds, and flags the three things to re-spec before final design. You confirm, sign, get paid. They keep the schedule.</p>
+              <a href="https://forms.gle/K3DgLqJTF8Si1wBdA" target="_blank" className="rk-btn rk-btn-link" data-exp="opp.datacenter" style={{ alignSelf: 'flex-start', marginTop: 4 }}>I'd take this engagement →</a>
             </div>
 
           </div>
@@ -165,7 +182,7 @@ function VariantA({ tweaks, ctaState, setCtaState, onCross }) {
             { id: 'own', q: "What does 'own my Agent' actually mean?",
               a: <>You own the Agent and everything it represents. If you leave RKNET, you take your Agent with you. If RKNET dissolves, you still have your Agent, your container, and your audit history. No employer, including RKNET, can repossess them.</> },
             { id: 'earn', q: 'How do earnings work, exactly?',
-              a: <>Three streams. <strong>Direct:</strong> when someone engages your Agent, you're paid the rate you set. <strong>Residuals:</strong> super-Agents — collective Agents multiple members's shaped — pay all contributors whenever they're engaged, by anyone. <strong>Dividends:</strong> the cooperative pays members a share of network-wide revenue. You choose your cash-vs-ownership mix at signup. <a href="#" data-exp="faq.earn.details">Numbers →</a></> },
+              a: <>Three streams. <strong>Direct:</strong> when someone engages your Agent, you're paid the rate you set. <strong>Residuals:</strong> super-Agents — collective Agents multiple members shaped — pay all contributors whenever they're engaged, by anyone. <strong>Dividends:</strong> the cooperative pays members a share of network-wide revenue. You choose your cash-vs-ownership mix at signup.</> },
             { id: 'employer', q: 'What if my employer has a policy against personal AI?',
               a: <>RKNET is designed to coexist with employer policy. Your container stays outside your employer's systems. During engagements, the audit trail proves exactly what crossed between sides. Several Am Law 100 firms have cleared RKNET for use by outside counsel.</> },
             { id: 'price', q: 'Is the free tier really forever free?',
@@ -179,11 +196,21 @@ function VariantA({ tweaks, ctaState, setCtaState, onCross }) {
         <div className="rk-cta-inner">
           <h2 className="rk-sechead-title">Claim your Agent.</h2>
           <p className="rk-sechead-sub">Reserve it once. Yours for the rest of your career.</p>
-          <div className="rk-cta-block">
-            <ExpertCTA state={ctaState} setState={setCtaState} />
+          <div style={{ marginTop: 32, display: 'flex', justifyContent: 'center' }}>
+            <a href="https://forms.gle/K3DgLqJTF8Si1wBdA"
+               target="_blank"
+               className="rk-btn rk-btn-primary rk-cta-button"
+               data-exp="cta.expert.claim"
+               onClick={() => RKTrack.bump('cta.expert.claim')}>
+              Claim your Agent
+            </a>
           </div>
-          <div style={{ marginTop: 24, display: 'flex', gap: 18, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="#" className="rk-btn rk-btn-link" style={{ color: 'rgba(250,248,245,0.85)', borderColor: 'var(--accent)' }} data-exp="cta.alt.newsletter">Not ready? Get occasional updates →</a>
+          <div className="rk-cta-foot">
+            <span>Free forever</span>
+            <span className="rk-cta-foot-dot">·</span>
+            <span>60 seconds to claim</span>
+            <span className="rk-cta-foot-dot">·</span>
+            <span>No credit card</span>
           </div>
         </div>
       </section>
@@ -193,7 +220,7 @@ function VariantA({ tweaks, ctaState, setCtaState, onCross }) {
       <StickyCTABar>
         <span>Free forever. 60 seconds to claim.</span>
         <a href="https://forms.gle/K3DgLqJTF8Si1wBdA" target="_blank" className="rk-btn rk-btn-primary" data-exp="sticky.primary.claim-agent" onClick={() => RKTrack.bump('sticky.primary.claim-agent')}>Claim your Agent</a>
-        <a href="#pricing" className="rk-sticky-ghost" data-exp="sticky.secondary.see-pricing">See pricing</a>
+        <a href="#ledger" className="rk-sticky-ghost" data-exp="sticky.secondary.see-earnings">See earnings</a>
       </StickyCTABar>
     </div>
   );

@@ -56,13 +56,16 @@ function VariantB({ tweaks, ctaState, setCtaState, onCross }) {
           <FeatureGrid items={[
             { icon: '01', title: 'Reputation you can trust',
               desc: "Browse senior practitioners with verified track records. Partners, outside counsel, specialist clinicians — the people everyone wants but nobody can schedule.",
-              cta: 'See the directory', ctaExp: 'how.directory' },
+              cta: 'See the directory', ctaExp: 'how.directory',
+              ctaHref: 'https://forms.gle/K3DgLqJTF8Si1wBdA' },
             { icon: '02', title: 'Start in minutes, not months',
               desc: "Their Agent carries their methods, judgment, and domain knowledge. You get the expert’s quality at 10× the speed and a fraction of the cost — no scheduling conflicts.",
-              cta: 'How Agents work', ctaExp: 'how.agents' },
+              cta: 'How Agents work', ctaExp: 'how.agents',
+              ctaHref: '#how' },
             { icon: '03', title: 'Confidentiality built in',
               desc: "Engagements run in sealed containers. Your data stays yours, their IP stays theirs. Clean separation, no leakage — without a six-week procurement process.",
-              cta: 'Security overview', ctaExp: 'how.security' },
+              cta: 'Security overview', ctaExp: 'how.security',
+              ctaHref: '#cleanroom' },
           ]} />
         </div>
       </section>
@@ -79,13 +82,17 @@ function VariantB({ tweaks, ctaState, setCtaState, onCross }) {
       {/* Use cases */}
       <section className="rk-psection" id="use-cases">
         <div className="rk-psection-inner">
-          <SectionHead eyebrow="Use cases" title={<>What companies are doing on RKNET.</>} />
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 28, marginTop: 8 }}>
+          <SectionHead
+            eyebrow="Use cases"
+            title={<>How companies are using RKNET <em>right now</em>.</>}
+            sub="The expert's Agent handles the work. You review the output. Partner-grade thinking, in days — not weeks of scheduling and partner invoices."
+          />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(420px, 100%), 1fr))', gap: 28, marginTop: 8 }}>
 
             <div className="rk-usecase-card" style={{ background: 'var(--paper)', border: '1px solid var(--rule)', padding: '28px 24px', display: 'flex', flexDirection: 'column', gap: 12 }}>
               <div style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--mute)', fontFamily: "'JetBrains Mono', monospace" }}>Stealth validation</div>
-              <h3 style={{ fontSize: 19, lineHeight: 1.3, margin: 0 }}>Get expert feedback on your idea — without revealing it.</h3>
-              <p style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--mute)', margin: 0 }}>You have an early business concept and you want a dozen industry influencers to pressure-test it. But you're not ready to expose the idea — or ever associate it with your name. On RKNET, your Agent presents the concept inside a sealed cleanroom. The experts' Agents respond with real, informed feedback. Nobody sees anyone else's inputs. You get world-class signal without giving away the play.</p>
+              <h3 style={{ fontSize: 19, lineHeight: 1.3, margin: 0 }}>Get expert review of your plans — without revealing them.</h3>
+              <p style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--mute)', margin: 0 }}>A deal in the works, a launch on deck, a strategic move you're not ready to put on paper outside your inner circle. You want a dozen senior practitioners to pressure-test it. On RKNET, your Agent presents the plan inside a sealed cleanroom. Expert Agents respond with real, informed feedback. Nobody — including the experts themselves — sees what anyone else contributed. You get world-class signal without giving away the play.</p>
               <a href="https://forms.gle/K3DgLqJTF8Si1wBdA" target="_blank" className="rk-btn rk-btn-link" data-exp="usecase.stealth" style={{ alignSelf: 'flex-start', marginTop: 4 }}>Try this use case →</a>
             </div>
 
@@ -97,17 +104,31 @@ function VariantB({ tweaks, ctaState, setCtaState, onCross }) {
             </div>
 
             <div className="rk-usecase-card" style={{ background: 'var(--paper)', border: '1px solid var(--rule)', padding: '28px 24px', display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <div style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--mute)', fontFamily: "'JetBrains Mono', monospace" }}>Compliance</div>
-              <h3 style={{ fontSize: 19, lineHeight: 1.3, margin: 0 }}>Your contractors already use personal AI. Now you have the audit trail.</h3>
-              <p style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--mute)', margin: 0 }}>Outside counsel and consultants are using their own AI tools on your engagements — you just can't see it. RKNET makes that work visible: every query receipted, IP contamination audited pre- and post-engagement, Article 10 mapping included. You didn't ban AI. You documented it.</p>
-              <a href="https://forms.gle/K3DgLqJTF8Si1wBdA" target="_blank" className="rk-btn rk-btn-link" data-exp="usecase.compliance" style={{ alignSelf: 'flex-start', marginTop: 4 }}>Try this use case →</a>
+              <div style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--mute)', fontFamily: "'JetBrains Mono', monospace" }}>Specialist on demand</div>
+              <h3 style={{ fontSize: 19, lineHeight: 1.3, margin: 0 }}>Get a senior specialist's judgment at 3 AM on a Sunday.</h3>
+              <p style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--mute)', margin: 0 }}>The deal closes Monday morning. The board meets Tuesday. Whatever the question — a patent landscape, a regulatory read, a tax-structure check — the expert's Agent carries their full domain knowledge and methods. It doesn't sleep, it doesn't have scheduling conflicts, and it costs a fraction of an emergency retainer. The human expert reviews the output on their schedule, not yours.</p>
+              <a href="https://forms.gle/K3DgLqJTF8Si1wBdA" target="_blank" className="rk-btn rk-btn-link" data-exp="usecase.ondemand" style={{ alignSelf: 'flex-start', marginTop: 4 }}>Try this use case →</a>
             </div>
 
             <div className="rk-usecase-card" style={{ background: 'var(--paper)', border: '1px solid var(--rule)', padding: '28px 24px', display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <div style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--mute)', fontFamily: "'JetBrains Mono', monospace" }}>Expert on demand</div>
-              <h3 style={{ fontSize: 19, lineHeight: 1.3, margin: 0 }}>Get a senior specialist's judgment at 3 AM on a Sunday.</h3>
-              <p style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--mute)', margin: 0 }}>The deal closes Monday morning and you need a patent landscape analysis now. On RKNET, the expert's Agent carries their full domain knowledge and methods. It doesn't sleep, it doesn't have scheduling conflicts, and it costs a fraction of an emergency retainer. The human expert reviews the output — on their schedule, not yours.</p>
-              <a href="https://forms.gle/K3DgLqJTF8Si1wBdA" target="_blank" className="rk-btn rk-btn-link" data-exp="usecase.ondemand" style={{ alignSelf: 'flex-start', marginTop: 4 }}>Try this use case →</a>
+              <div style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--mute)', fontFamily: "'JetBrains Mono', monospace" }}>Model training</div>
+              <h3 style={{ fontSize: 19, lineHeight: 1.3, margin: 0 }}>Train your domain model on partner-grade judgment — without scraping anyone.</h3>
+              <p style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--mute)', margin: 0 }}>Domain models need real expertise, not pyramid-bottom signal. On RKNET, partners contribute graded reasoning inside sealed cleanrooms. Provenance is receipted, contributors retain ownership of their reasoning patterns, and the work is verifiable. You get the signal you actually paid for. Your training pipeline gets clean attribution. The experts show up because they're not getting brain-scraped.</p>
+              <a href="https://forms.gle/K3DgLqJTF8Si1wBdA" target="_blank" className="rk-btn rk-btn-link" data-exp="usecase.training" style={{ alignSelf: 'flex-start', marginTop: 4 }}>Try this use case →</a>
+            </div>
+
+            <div className="rk-usecase-card" style={{ background: 'var(--paper)', border: '1px solid var(--rule)', padding: '28px 24px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <div style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--mute)', fontFamily: "'JetBrains Mono', monospace" }}>Security review</div>
+              <h3 style={{ fontSize: 19, lineHeight: 1.3, margin: 0 }}>Get audit-ready before the deal cycle does.</h3>
+              <p style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--mute)', margin: 0 }}>Your biggest enterprise prospect wants SOC 2 evidence by month-end. Your audit firm's calendar is booked through next quarter. On RKNET, a senior security practitioner's Agent reviews your architecture and policies, pulls control gaps from a decade of comparable audits, and drafts the readiness report with prioritized remediation. The human signs off. You hit the deadline. The deal closes.</p>
+              <a href="https://forms.gle/K3DgLqJTF8Si1wBdA" target="_blank" className="rk-btn rk-btn-link" data-exp="usecase.security" style={{ alignSelf: 'flex-start', marginTop: 4 }}>Try this use case →</a>
+            </div>
+
+            <div className="rk-usecase-card" style={{ background: 'var(--paper)', border: '1px solid var(--rule)', padding: '28px 24px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <div style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.12em', color: 'var(--mute)', fontFamily: "'JetBrains Mono', monospace" }}>Infrastructure review</div>
+              <h3 style={{ fontSize: 19, lineHeight: 1.3, margin: 0 }}>Pressure-test your power-system design before final design freeze.</h3>
+              <p style={{ fontSize: 14, lineHeight: 1.6, color: 'var(--mute)', margin: 0 }}>You're scaling a 1.2&nbsp;GW campus and the prelim utility study just flagged capacity issues. Your in-house team is heads-down on the next site. On RKNET, a senior data-center electrical engineer's Agent walks the substation interface and load-balancing scheme, pulls patterns from 30+ comparable builds, and flags the things to re-spec. The human signs the review. You keep the schedule.</p>
+              <a href="https://forms.gle/K3DgLqJTF8Si1wBdA" target="_blank" className="rk-btn rk-btn-link" data-exp="usecase.datacenter" style={{ alignSelf: 'flex-start', marginTop: 4 }}>Try this use case →</a>
             </div>
 
           </div>
@@ -124,7 +145,6 @@ function VariantB({ tweaks, ctaState, setCtaState, onCross }) {
               <p className="rk-sechead-sub">Partners, senior specialists, and independent consultants with 15+ years of practice. They join RKNET because they keep their craft. You engage them because you get their best thinking — faster and cheaper than flying them in.</p>
               <div style={{ marginTop: 24, display: 'flex', gap: 14, flexWrap: 'wrap' }}>
                 <a href="https://forms.gle/K3DgLqJTF8Si1wBdA" target="_blank" className="rk-btn rk-btn-primary" data-exp="directory.cta.browse">Browse the directory</a>
-                <a href="#" className="rk-btn rk-btn-link" data-exp="directory.cta.case">Case study: Q3 diagnostic →</a>
               </div>
             </div>
             <AgentScreen />
